@@ -2,36 +2,44 @@ import pandas as pd
 import os
 import io
 
-df = pd.read_csv('/home/michael/NoahsRug/5784/noahs-customers.csv')
-
-df['clean name'] =df['name'].replace(
-        [' Jr.', ' Sr.',' I', ' II', ' III'], '', regex=True).str.strip()
-
-df['last_name'] = df['clean name'].str.split().str[-1]
-
-lastnamelist = df['last_name'].tolist()
-
-def lets_to_nums(dictionary, letter):
+def lets_to_nums(letter):
+    phoneword = {
+        2 : "ABCabc",
+        3 : "DEFdef",
+        4 : "GHIghi",
+        5 : "JKLjkl",
+        6 : "MNOmno",
+        7 : "PQRSpqrs",
+        8 : "TUVtuv",
+        9 : "WXYZwxyz"
+    }
     keyresult = []
-    for key, value in dictionary.items():
+    for key, value in phoneword.items():
         if letter in str(value):
             keyresult.append(key)
     if not keyresult:
         print("error")
-    return keyresult
+    return str("".join(map(str, keyresult)))
 
-testletter = "A"
-phoneword = {
-        2 : "ABC",
-        3 : "DEF",
-        4 : "GHI",
-        5 : "JKL",
-        6 : "MNO",
-        7 : "PQRS",
-        8 : "TUV",
-        9 : "WXYZ"
-}
+full_df = pd.read_csv('/home/michael/NoahsRug/noahs-customers.csv')
 
-keymatch = lets_to_nums(phoneword, testletter)
-print(keymatch)
+
+full_df['clean name'] =full_df['name'].replace(
+        [' Jr.', ' Sr.',' I', ' II', ' III'], '', regex=True).str.strip()
+
+full_df['clean phone'] =full_df['phone'].replace(
+        '-', '', regex=True).str.strip()
+
+full_df['last_name'] = full_df['clean name'].str.split().str[-1]
+
+full_df['phone-7'] = full_df['clean phone'].astype(str).str[-7:].astype(int)
+
+full_df['nametonum'] = full_df['last_name'].apply(lets_to_nums)
+
+next_df = full_df[['nametonum', 'phone-7']].copy()
+
+lastnamelist = next_df
+
+
+
 print(lastnamelist)
