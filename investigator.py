@@ -39,8 +39,10 @@ full_df['nametonum'] = full_df['last_name'].apply(lets_to_nums)
 
 next_df = full_df[['nametonum', 'clean phone']].copy()
 
-mask  = next_df['nametonum'] == next_df['clean phone']
+mask = next_df['nametonum'] == next_df['clean phone']
 
-result = full_df[mask]
+result  = full_df[mask]
+
+
 
 print(result)

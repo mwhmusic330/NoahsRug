@@ -6,7 +6,7 @@ import io
 
 
 
-dir_path='/home/michael/NoahsRug/5784/'
+dir_path='/home/michael/5784/'
 filenames = os.listdir(dir_path)
 selected_filename = st.selectbox('Select a file', filenames, key = 'fileselect')
 
