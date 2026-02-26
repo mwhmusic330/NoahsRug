@@ -6,8 +6,10 @@ df = pd.read_csv('/home/michael/NoahsRug/noahs-orders.csv')
 
 customers_df = pd.read_csv('/home/michael/NoahsRug/noahs-customers.csv')
 
-def initials(name):
-    return ''.join(word[0] for word in name.split()).upper()
+def initials(full_name):
+    namelist = full_name.split()
+    initials = "".join([name[0].upper() for name in namelist])
+    return initials
 
 customers_df['initials'] = customers_df['name'].apply(initials)
 
@@ -22,3 +24,5 @@ year_filter = df[df['ordered'].dt.year == 2017]
 print(year_filter)
 print(init_mask)
 
+
+#### Function works to get initials i tested by printing customers_df['initials'] but i am still getting all falses on comparison. Thinking a middle initial may be involved. Starting on that work around.
