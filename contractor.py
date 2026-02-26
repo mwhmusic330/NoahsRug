@@ -13,9 +13,10 @@ def initials(full_name):
 
 customers_df['initials'] = customers_df['name'].apply(initials)
 
-init_find = 'JA'
+init_find = 'JP', 'J.P'
+pattern = '|'.join(init_find)
 
-init_mask = str(customers_df['initials']) == init_find
+init_mask = customers_df['initials'].str.contains(pattern, na=False)
 
 df['ordered'] = pd.to_datetime(df['ordered'])
 
