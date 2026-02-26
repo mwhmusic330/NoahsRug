@@ -13,7 +13,7 @@ def initials(full_name):
 
 customers_df['initials'] = customers_df['name'].apply(initials)
 
-init_find = 'JP'
+init_find = 'JA'
 
 init_mask = str(customers_df['initials']) == init_find
 
@@ -27,3 +27,4 @@ print(init_mask)
 
 #### Function works to get initials i tested by printing customers_df['initials'] but i am still getting all falses on comparison. Thinking a middle initial may be involved. Starting on that work around.
 #### 2-26 Still looking at this tried changing the comparison string and ensuring that the output of the initials column is a string with str() method I'm just not sure why I keep getting falses? Unlss I'm reading the probem wrong theres gotta be initials 'JP' in here.
+#### update update 2-26 my comparison isnt working properly as can be seen here, tested with initials i knew existed. Now I found the real problem
