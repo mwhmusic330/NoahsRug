@@ -9,6 +9,7 @@ customers_df = pd.read_csv('/home/michael/NoahsRug/noahs-customers.csv')
 
 sku_df  = pd.read_csv('/home/michael/NoahsRug/noahs-orders_items.csv')
 
+products_df = pd.read_csv('/home/michael/NoahsRug/noahs-products.csv')
 
 def initials(full_name):
     namelist = full_name.split()
@@ -28,10 +29,14 @@ year_mask = df['ordered'].dt.year == 2017
 
 year_filter = df[year_mask]
 
+clean_mask = products_df['desc'] == 'Cleaning'
+
+clean_filter = products_df[clean_mask]
+
 result = pd.merge(init_filter, year_filter, on='customerid')
 print(result)
 print(sku_df['sku'].apply(lambda x: x[:3]).unique())
-
+print(products_df.head(20))
 
 #### Function works to get initials i tested by printing customers_df['initials'] but i am still getting all falses on comparison. Thinking a middle initial may be involved. Starting on that work around.
 #### 2-26 Still looking at this tried changing the comparison string and ensuring that the output of the initials column is a string with str() method I'm just not sure why I keep getting falses? Unlss I'm reading the probem wrong theres gotta be initials 'JP' in here.
