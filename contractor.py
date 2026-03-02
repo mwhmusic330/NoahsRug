@@ -1,10 +1,14 @@
 import pandas as pd
 
-
+pd.options.display.width = 400
+pd.options.display.max_columns = 400
 
 df = pd.read_csv('/home/michael/NoahsRug/noahs-orders.csv')
 
 customers_df = pd.read_csv('/home/michael/NoahsRug/noahs-customers.csv')
+
+sku_df  = pd.read_csv('/home/michael/NoahsRug/noahs-orders_items.csv')
+
 
 def initials(full_name):
     namelist = full_name.split()
@@ -14,14 +18,19 @@ def initials(full_name):
 customers_df['initials'] = customers_df['name'].apply(initials)
 
 
-init_mask = customers_df['initials'] == 'JA'
+init_mask = customers_df['initials'] == 'JP'
+
+init_filter = customers_df[init_mask]
 
 df['ordered'] = pd.to_datetime(df['ordered'])
 
-year_filter = df[df['ordered'].dt.year == 2017]
+year_mask = df['ordered'].dt.year == 2017
 
-print(year_filter)
-print(init_mask)
+year_filter = df[year_mask]
+
+result = pd.merge(init_filter, year_filter, on='customerid')
+print(result)
+print(sku_df['sku'].apply(lambda x: x[:3]).unique())
 
 
 #### Function works to get initials i tested by printing customers_df['initials'] but i am still getting all falses on comparison. Thinking a middle initial may be involved. Starting on that work around.
