@@ -51,4 +51,4 @@ print(merge2_df)
 #### Got it to spit out True on 'JA' so the comparison now works but 'JP' doesnt seem to exist and now im confused
 ### 2-27 update, simplified the mask and used 'JA' a value i know exists to check if it works and it does. I have gone back and checked my steps here multiple times now and am fairly stuck.
 #### 3-9 update found the cleaning supplies, it was only one entry to look for so just have to follow the path as far as it goes now. More to come shortly.
-
+#### 3-10 update, guess I have to cross reference for coffee and bagels too because the last merge i did should result in every row with my parameters thus far and its still a lot so more to come.
