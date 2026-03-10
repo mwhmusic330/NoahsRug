@@ -35,9 +35,13 @@ clean_mask = products_df['sku'].str.startswith(search_prefix)
 
 clean_filter = products_df[clean_mask]
 
+items_mask = sku_df['sku'].str.startswith(search_prefix)
+
+items_filter = sku_df[items_mask]
+
 result = pd.merge(init_filter, year_filter, on='customerid')
 print(result)
-print(sku_df['sku'].apply(lambda x: x[:3]).unique())
+print(items_filter)
 print(clean_filter)
 
 #### Function works to get initials i tested by printing customers_df['initials'] but i am still getting all falses on comparison. Thinking a middle initial may be involved. Starting on that work around.
@@ -46,3 +50,4 @@ print(clean_filter)
 #### Got it to spit out True on 'JA' so the comparison now works but 'JP' doesnt seem to exist and now im confused
 ### 2-27 update, simplified the mask and used 'JA' a value i know exists to check if it works and it does. I have gone back and checked my steps here multiple times now and am fairly stuck.
 #### 3-9 update found the cleaning supplies, it was only one entry to look for so just have to follow the path as far as it goes now. More to come shortly.
+
