@@ -39,10 +39,11 @@ items_mask = sku_df['sku'].str.startswith(search_prefix)
 
 items_filter = sku_df[items_mask]
 
-result = pd.merge(init_filter, year_filter, on='customerid')
-print(result)
+merge1_df  = pd.merge(init_filter, year_filter, on='customerid')
+merge2_df = pd.merge(merge1_df, items_filter, on='orderid', how='inner') 
+print(merge1_df)
 print(items_filter)
-print(clean_filter)
+print(merge2_df)
 
 #### Function works to get initials i tested by printing customers_df['initials'] but i am still getting all falses on comparison. Thinking a middle initial may be involved. Starting on that work around.
 #### 2-26 Still looking at this tried changing the comparison string and ensuring that the output of the initials column is a string with str() method I'm just not sure why I keep getting falses? Unlss I'm reading the probem wrong theres gotta be initials 'JP' in here.
