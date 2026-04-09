@@ -37,6 +37,7 @@ clean_filter = products_df[clean_mask]
 
 items_mask = sku_df['sku'].str.startswith(search_prefix)
 
+
 items_filter = sku_df[items_mask]
 
 merge1_df  = pd.merge(init_filter, year_filter, on='customerid')
