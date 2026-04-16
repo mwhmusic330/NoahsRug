@@ -7,7 +7,7 @@ df = pd.read_csv('/home/michael/NoahsRug/noahs-orders.csv')
 
 df_products = pd.read_csv('/home/michael/NoahsRug/noahs-products.csv')
 
-sku_df  = pd.read_csv('/home/michael/NoahsRug/noahs-orders_items.csv')
+orderid_df  = pd.read_csv('/home/michael/NoahsRug/noahs-orders_items.csv')
 
 cus_df  = pd.read_csv('/home/michael/NoahsRug/noahs-customers.csv')
 
@@ -24,7 +24,9 @@ sku_filter = df_products[sku_mask]
 
 desc_mask = sku_filter['desc'].str.contains('Jersey')
 desc_filter = sku_filter[desc_mask]
+merge1_df = pd.merge(desc_filter, orderid_df, on='sku')
+merge2_df = pd.merge(merge1_df, df, on='orderid')
+merge3_df = pd.merge(merge2_df, location_filter, on='customerid')
 
-
-print(desc_filter)
+print(merge3_df)
 
